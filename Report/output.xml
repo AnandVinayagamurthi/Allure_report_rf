@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.11.5 on win32)" generated="20250520 16:55:19.239" rpa="false" schemaversion="4">
+<suite id="s1" name="Tc01" source="E:\Archimedis\am\Testcase\tc01.robot">
+<test id="s1-t1" name="Log Telerik 2021 WinForms Release Data" line="12">
+<kw name="Extract 2021 Release Titles And Sections" library="tc01_support">
+<doc>Extracts release titles and related paragraphs from Telerik WinForms release history page for the year 2021.</doc>
+<kw name="Login Application" library="common">
+<arg>${telerik_url}</arg>
+<doc>Using this keyword we can Browserstack website.</doc>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys,selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20250520 16:55:19.905" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x00000211B4E8F290&gt;</msg>
+<status status="PASS" starttime="20250520 16:55:19.905" endtime="20250520 16:55:19.905"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--incognito</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20250520 16:55:19.905" endtime="20250520 16:55:19.906"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<var>${driver}</var>
+<arg>Chrome</arg>
+<arg>options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20250520 16:55:19.906" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20250520 16:55:21.423" level="INFO">${driver} = 1</msg>
+<status status="PASS" starttime="20250520 16:55:19.906" endtime="20250520 16:55:21.423"/>
+</kw>
+<kw name="Set Window Size" library="SeleniumLibrary">
+<arg>1920</arg>
+<arg>1080</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" starttime="20250520 16:55:21.423" endtime="20250520 16:55:21.799"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${Browser_url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250520 16:55:21.799" level="INFO">Opening url 'https://www.telerik.com/support/whats-new/winforms/release-history'</msg>
+<status status="PASS" starttime="20250520 16:55:21.799" endtime="20250520 16:55:25.124"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250520 16:55:25.124" endtime="20250520 16:55:25.224"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>700milliseconds</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" starttime="20250520 16:55:25.225" endtime="20250520 16:55:25.226"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:19.905" endtime="20250520 16:55:25.226"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${Dates_count}</var>
+<arg>${paragraph_xpath}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20250520 16:55:26.068" level="INFO">${Dates_count} = 9</msg>
+<status status="PASS" starttime="20250520 16:55:25.226" endtime="20250520 16:55:26.068"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${output_dict}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250520 16:55:26.069" level="INFO">${output_dict} = {}</msg>
+<status status="PASS" starttime="20250520 16:55:26.068" endtime="20250520 16:55:26.069"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>1</value>
+<value>${Dates_count}+1</value>
+<iter>
+<var name="${index}">1</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:26.070" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[1]</msg>
+<status status="PASS" starttime="20250520 16:55:26.069" endtime="20250520 16:55:26.070"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:26.070" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[1]</msg>
+<status status="PASS" starttime="20250520 16:55:26.070" endtime="20250520 16:55:26.070"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:27.527" level="INFO">${title_text} = Telerik UI for WinForms 2025.1.211 (2025 Q1)</msg>
+<status status="PASS" starttime="20250520 16:55:26.070" endtime="20250520 16:55:27.527"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:29.034" level="INFO">${section_text} = November 23, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:27.527" endtime="20250520 16:55:29.034"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:29.034" endtime="20250520 16:55:29.034"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:26.069" endtime="20250520 16:55:29.034"/>
+</iter>
+<iter>
+<var name="${index}">2</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:29.034" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[2]</msg>
+<status status="PASS" starttime="20250520 16:55:29.034" endtime="20250520 16:55:29.034"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:29.034" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[2]</msg>
+<status status="PASS" starttime="20250520 16:55:29.034" endtime="20250520 16:55:29.034"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:30.530" level="INFO">${title_text} = Telerik UI for WinForms 2024.4.1113 (2024 Q4)</msg>
+<status status="PASS" starttime="20250520 16:55:29.034" endtime="20250520 16:55:30.530"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:32.017" level="INFO">${section_text} = November 9, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:30.530" endtime="20250520 16:55:32.017"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:32.017" endtime="20250520 16:55:32.020"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:29.034" endtime="20250520 16:55:32.020"/>
+</iter>
+<iter>
+<var name="${index}">3</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:32.020" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[3]</msg>
+<status status="PASS" starttime="20250520 16:55:32.020" endtime="20250520 16:55:32.020"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:32.020" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[3]</msg>
+<status status="PASS" starttime="20250520 16:55:32.020" endtime="20250520 16:55:32.020"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:33.507" level="INFO">${title_text} = Telerik UI for WinForms 2024.3.924</msg>
+<status status="PASS" starttime="20250520 16:55:32.020" endtime="20250520 16:55:33.507"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:34.940" level="INFO">${section_text} = September 15, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:33.507" endtime="20250520 16:55:34.940"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:34.940" endtime="20250520 16:55:34.940"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:32.020" endtime="20250520 16:55:34.940"/>
+</iter>
+<iter>
+<var name="${index}">4</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:34.940" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[4]</msg>
+<status status="PASS" starttime="20250520 16:55:34.940" endtime="20250520 16:55:34.940"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:34.940" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[4]</msg>
+<status status="PASS" starttime="20250520 16:55:34.940" endtime="20250520 16:55:34.940"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:36.393" level="INFO">${title_text} = Telerik UI for WinForms 2024.3.806 (2024 Q3)</msg>
+<status status="PASS" starttime="20250520 16:55:34.940" endtime="20250520 16:55:36.393"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:37.882" level="INFO">${section_text} = June 16, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:36.393" endtime="20250520 16:55:37.882"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:37.883" endtime="20250520 16:55:37.886"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:34.940" endtime="20250520 16:55:37.886"/>
+</iter>
+<iter>
+<var name="${index}">5</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:37.888" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[5]</msg>
+<status status="PASS" starttime="20250520 16:55:37.888" endtime="20250520 16:55:37.888"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:37.888" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[5]</msg>
+<status status="PASS" starttime="20250520 16:55:37.888" endtime="20250520 16:55:37.888"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:39.381" level="INFO">${title_text} = Telerik UI for WinForms 2024.2.514 (2024 Q2)</msg>
+<status status="PASS" starttime="20250520 16:55:37.888" endtime="20250520 16:55:39.381"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:40.872" level="INFO">${section_text} = May 12, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:39.381" endtime="20250520 16:55:40.872"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:40.872" endtime="20250520 16:55:40.872"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:37.888" endtime="20250520 16:55:40.872"/>
+</iter>
+<iter>
+<var name="${index}">6</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:40.872" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[6]</msg>
+<status status="PASS" starttime="20250520 16:55:40.872" endtime="20250520 16:55:40.872"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:40.872" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[6]</msg>
+<status status="PASS" starttime="20250520 16:55:40.872" endtime="20250520 16:55:40.872"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:42.367" level="INFO">${title_text} = Telerik UI for WinForms 2024.1.312</msg>
+<status status="PASS" starttime="20250520 16:55:40.872" endtime="20250520 16:55:42.367"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:43.860" level="INFO">${section_text} = March 26, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:42.367" endtime="20250520 16:55:43.860"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:43.860" endtime="20250520 16:55:43.860"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:40.872" endtime="20250520 16:55:43.860"/>
+</iter>
+<iter>
+<var name="${index}">7</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:43.868" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[7]</msg>
+<status status="PASS" starttime="20250520 16:55:43.860" endtime="20250520 16:55:43.868"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:43.868" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[7]</msg>
+<status status="PASS" starttime="20250520 16:55:43.868" endtime="20250520 16:55:43.868"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:45.351" level="INFO">${title_text} = Telerik UI for WinForms 2024.1.130 (2024 Q1)</msg>
+<status status="PASS" starttime="20250520 16:55:43.868" endtime="20250520 16:55:45.351"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:46.833" level="INFO">${section_text} = February 24, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:45.351" endtime="20250520 16:55:46.833"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:46.833" endtime="20250520 16:55:46.833"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:43.860" endtime="20250520 16:55:46.837"/>
+</iter>
+<iter>
+<var name="${index}">8</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:46.837" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[8]</msg>
+<status status="PASS" starttime="20250520 16:55:46.837" endtime="20250520 16:55:46.837"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:46.841" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[8]</msg>
+<status status="PASS" starttime="20250520 16:55:46.841" endtime="20250520 16:55:46.841"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:48.330" level="INFO">${title_text} = UI for WinForms R3 2023 SP1 (version 2023.3.1114)</msg>
+<status status="PASS" starttime="20250520 16:55:46.841" endtime="20250520 16:55:48.330"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:49.809" level="INFO">${section_text} = February 4, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:48.330" endtime="20250520 16:55:49.809"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:49.809" endtime="20250520 16:55:49.811"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:46.837" endtime="20250520 16:55:49.811"/>
+</iter>
+<iter>
+<var name="${index}">9</var>
+<kw name="Format String" library="String">
+<var>${Titles}</var>
+<arg>${TITLE_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:49.811" level="INFO">${Titles} = (//ul[@class="List Space--streched"]//a)[9]</msg>
+<status status="PASS" starttime="20250520 16:55:49.811" endtime="20250520 16:55:49.811"/>
+</kw>
+<kw name="Format String" library="String">
+<var>${paragraphs}</var>
+<arg>${paragraph_xpath_DYNAMIC}</arg>
+<arg>index=${index}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20250520 16:55:49.811" level="INFO">${paragraphs} = (//ul[@class="List Space--streched"]//p[contains(text(),"2021")])[9]</msg>
+<status status="PASS" starttime="20250520 16:55:49.811" endtime="20250520 16:55:49.811"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${title_text}</var>
+<arg>${Titles}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:51.311" level="INFO">${title_text} = UI for WinForms R3 2023 (version 2023.3.1010)</msg>
+<status status="PASS" starttime="20250520 16:55:49.811" endtime="20250520 16:55:51.311"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${section_text}</var>
+<arg>${paragraphs}</arg>
+<arg>${ATTRIBUTE}</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20250520 16:55:52.776" level="INFO">${section_text} = January 22, 2021</msg>
+<status status="PASS" starttime="20250520 16:55:51.311" endtime="20250520 16:55:52.776"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${output_dict}</arg>
+<arg>${title_text}=${section_text}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20250520 16:55:52.776" endtime="20250520 16:55:52.776"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:49.811" endtime="20250520 16:55:52.776"/>
+</iter>
+<status status="PASS" starttime="20250520 16:55:26.069" endtime="20250520 16:55:52.781"/>
+</for>
+<kw name="Log" library="BuiltIn">
+<arg>${output_dict}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250520 16:55:52.781" level="INFO">{'Telerik UI for WinForms 2025.1.211 (2025 Q1)': 'November 23, 2021', 'Telerik UI for WinForms 2024.4.1113 (2024 Q4)': 'November 9, 2021', 'Telerik UI for WinForms 2024.3.924': 'September 15, 2021', 'Telerik UI for WinForms 2024.3.806 (2024 Q3)': 'June 16, 2021', 'Telerik UI for WinForms 2024.2.514 (2024 Q2)': 'May 12, 2021', 'Telerik UI for WinForms 2024.1.312': 'March 26, 2021', 'Telerik UI for WinForms 2024.1.130 (2024 Q1)': 'February 24, 2021', 'UI for WinForms R3 2023 SP1 (version 2023.3.1114)': 'February 4, 2021', 'UI for WinForms R3 2023 (version 2023.3.1010)': 'January 22, 2021'}</msg>
+<status status="PASS" starttime="20250520 16:55:52.781" endtime="20250520 16:55:52.781"/>
+</kw>
+<kw name="&quot;Close the Browser&quot;" library="common">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20250520 16:55:52.781" endtime="20250520 16:55:55.656"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:52.781" endtime="20250520 16:55:55.656"/>
+</kw>
+<status status="PASS" starttime="20250520 16:55:19.904" endtime="20250520 16:55:55.656"/>
+</kw>
+<doc>This test case fetches and logs Telerik WinForms release titles and corresponding 2021 section summaries.</doc>
+<status status="PASS" starttime="20250520 16:55:19.904" endtime="20250520 16:55:55.656"/>
+</test>
+<status status="PASS" starttime="20250520 16:55:19.239" endtime="20250520 16:55:55.656"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Tc01">Tc01</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20250520 16:55:19.239" level="ERROR">Taking listener 'allure_robotframework:ALLURE_RESULTS_DIR=Report' into use failed: Importing listener 'allure_robotframework' failed: ModuleNotFoundError: No module named 'allure_robotframework'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\Scripts\robot.exe
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\python311.zip
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\DLLs
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\win32
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\win32\lib
+  C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\Pythonwin</msg>
+<msg timestamp="20250520 16:55:19.900" level="ERROR">Error in file 'E:\Archimedis\am\Testcase\tc01_support.robot' on line 9: Error in file 'E:\Archimedis\am\Testcase\tc01.robot' on line 11: Resource file with 'Test Cases' section is invalid.</msg>
+</errors>
+</robot>

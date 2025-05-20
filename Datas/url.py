@@ -1,0 +1,1 @@
+telerik_url= "https://www.telerik.com/support/whats-new/winforms/release-history"
